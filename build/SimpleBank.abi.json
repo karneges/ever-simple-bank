@@ -1,0 +1,178 @@
+{
+	"ABI version": 2,
+	"version": "2.2",
+	"header": ["time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+				{"name":"_tokenRoot","type":"address"},
+				{"name":"_userDataCode","type":"cell"},
+				{"name":"_randomNonce","type":"uint64"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "receiveTokenWalletAddress",
+			"inputs": [
+				{"name":"wallet","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getDetails",
+			"inputs": [
+				{"name":"answerId","type":"uint32"}
+			],
+			"outputs": [
+				{"components":[{"name":"tokenRoot","type":"address"},{"name":"tokenWallet","type":"address"},{"name":"tokenBalance","type":"uint128"},{"name":"owner","type":"address"}],"name":"value0","type":"tuple"}
+			]
+		},
+		{
+			"name": "registerUser",
+			"inputs": [
+				{"name":"send_gas_to","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getUserDataAddress",
+			"inputs": [
+				{"name":"answerId","type":"uint32"},
+				{"name":"user","type":"address"}
+			],
+			"outputs": [
+				{"name":"value0","type":"address"}
+			]
+		},
+		{
+			"name": "finishDeposit",
+			"inputs": [
+				{"name":"_amount","type":"uint128"},
+				{"name":"_nonce","type":"uint64"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "withdraw",
+			"inputs": [
+				{"name":"_amount","type":"uint128"},
+				{"name":"_nonce","type":"uint64"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "finishWithdraw",
+			"inputs": [
+				{"name":"user","type":"address"},
+				{"name":"_amount","type":"uint128"},
+				{"name":"_nonce","type":"uint64"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "startBurn",
+			"inputs": [
+				{"name":"_targetUser","type":"address"},
+				{"name":"_amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "finishBurn",
+			"inputs": [
+				{"components":[{"name":"amount","type":"uint128"},{"name":"user","type":"address"}],"name":"userData","type":"tuple"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "dummy",
+			"inputs": [
+				{"name":"user_wallet","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "onAcceptTokensTransfer",
+			"inputs": [
+				{"name":"_tokenRoot","type":"address"},
+				{"name":"_amount","type":"uint128"},
+				{"name":"_sender","type":"address"},
+				{"name":"_senderWallet","type":"address"},
+				{"name":"_remainingGasTo","type":"address"},
+				{"name":"_payload","type":"cell"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "nonce",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"nonce","type":"uint128"}
+			]
+		},
+		{
+			"name": "tokenWallet",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"tokenWallet","type":"address"}
+			]
+		},
+		{
+			"name": "userDataCode",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"userDataCode","type":"cell"}
+			]
+		}
+	],
+	"data": [
+		{"key":1,"name":"nonce","type":"uint128"}
+	],
+	"events": [
+		{
+			"name": "Deposit",
+			"inputs": [
+				{"name":"user","type":"address"},
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "Withdraw",
+			"inputs": [
+				{"name":"user","type":"address"},
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"nonce","type":"uint128"},
+		{"name":"tokenRoot","type":"address"},
+		{"name":"tokenWallet","type":"address"},
+		{"name":"owner","type":"address"},
+		{"name":"tokenBalance","type":"uint128"},
+		{"name":"userDataCode","type":"cell"},
+		{"name":"randomNonce","type":"uint64"},
+		{"components":[{"name":"value","type":"uint128"},{"name":"user","type":"address"}],"name":"pendingBurn","type":"map(address,tuple)"}
+	]
+}

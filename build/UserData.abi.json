@@ -1,0 +1,128 @@
+{
+	"ABI version": 2,
+	"version": "2.2",
+	"header": ["time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getDetails",
+			"inputs": [
+				{"name":"answerId","type":"uint32"}
+			],
+			"outputs": [
+				{"components":[{"name":"amount","type":"uint128"},{"name":"user","type":"address"}],"name":"value0","type":"tuple"}
+			]
+		},
+		{
+			"name": "processDeposit",
+			"inputs": [
+				{"name":"_amount","type":"uint128"},
+				{"name":"_nonce","type":"uint64"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "burn",
+			"inputs": [
+				{"name":"_amount","type":"uint128"},
+				{"name":"send_gas_to","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "processWithdraw",
+			"inputs": [
+				{"name":"_amount","type":"uint128"},
+				{"name":"_nonce","type":"uint64"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "sendToUser",
+			"inputs": [
+				{"name":"_targetUser","type":"address"},
+				{"name":"_amount","type":"uint128"},
+				{"name":"send_gas_to","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "receiveFromUser",
+			"inputs": [
+				{"name":"_user","type":"address"},
+				{"name":"_amount","type":"uint128"},
+				{"name":"send_gas_to","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "amount",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"amount","type":"uint128"}
+			]
+		},
+		{
+			"name": "userDataCode",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"userDataCode","type":"cell"}
+			]
+		}
+	],
+	"data": [
+		{"key":1,"name":"user","type":"address"},
+		{"key":2,"name":"userDataCode","type":"cell"},
+		{"key":3,"name":"simpleBank","type":"address"}
+	],
+	"events": [
+		{
+			"name": "Receive",
+			"inputs": [
+				{"name":"fromUser","type":"address"},
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "Send",
+			"inputs": [
+				{"name":"toUser","type":"address"},
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "Burn",
+			"inputs": [
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"name":"_pubkey","type":"uint256"},
+		{"name":"_timestamp","type":"uint64"},
+		{"name":"_constructorFlag","type":"bool"},
+		{"name":"amount","type":"uint128"},
+		{"name":"user","type":"address"},
+		{"name":"userDataCode","type":"cell"},
+		{"name":"simpleBank","type":"address"}
+	]
+}

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "chai": "^4.3.6",
+    "prettier": "^2.7.0",
+    "locklift": "github:broxus/ton-locklift#f647b6701741b22f1e85f1ebb663af5d5d7ef44b",
+    "broxus-ton-tokens-contracts": "github:broxus/ton-eth-bridge-token-contracts#d3c1cd920c0320ffaab03b54c878dd0e06fed3c7"
+  },
+  "scripts": {
+    "test": "npx locklift test --config locklift.config.js --network local"
+  }
+}
