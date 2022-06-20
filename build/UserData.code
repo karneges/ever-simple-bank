@@ -10,7 +10,7 @@ IFREF {
 GETGLOB 6
 THROWIF 51
 ENDS
-.loc ../contracts/UserData.sol, 23
+.loc ../contracts/UserData.sol, 24
 GETGLOB 9
 GETGLOB 13
 SDEQ
@@ -26,7 +26,7 @@ THROW 0
 CALL $_buildInitData_internal_macro$
 
 .macro _buildInitData_internal_macro
-.loc ../contracts/UserData.sol, 27
+.loc ../contracts/UserData.sol, 35
 PUSHINT 0
 NEWC
 STU 256
@@ -66,7 +66,7 @@ ENDC
 CALL $_reserve_internal_macro$
 
 .macro _reserve_internal_macro
-.loc ../contracts/UserData.sol, 39
+.loc ../contracts/UserData.sol, 47
 GETPARAM 7
 FIRST
 DEPTH
@@ -87,7 +87,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/UserData.sol, 42
+.loc ../contracts/UserData.sol, 50
 LDU 32
 GETGLOB 4
 ROT
@@ -165,7 +165,7 @@ IFREF {
 THROW 0
 
 .macro getDetails_internal_macro
-.loc ../contracts/UserData.sol, 43
+.loc ../contracts/UserData.sol, 51
 GETGLOB 4
 PUSHINT 0
 SETINDEXQ 2
@@ -184,7 +184,7 @@ PAIR
 CALL $increaseAmount_internal_macro$
 
 .macro increaseAmount_internal_macro
-.loc ../contracts/UserData.sol, 48
+.loc ../contracts/UserData.sol, 56
 GETGLOB 10
 ADD
 UFITS 128
@@ -196,7 +196,7 @@ SETGLOB 10
 CALL $decreaseAmount_internal_macro$
 
 .macro decreaseAmount_internal_macro
-.loc ../contracts/UserData.sol, 51
+.loc ../contracts/UserData.sol, 59
 GETGLOB 10
 SUBR
 UFITS 128
@@ -212,7 +212,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/UserData.sol, 54
+.loc ../contracts/UserData.sol, 62
 LDU 128
 LDU 64
 ENDS
@@ -227,23 +227,23 @@ CALLREF {
 THROW 0
 
 .macro processDeposit_internal_macro
-.loc ../contracts/UserData.sol, 55
+.loc ../contracts/UserData.sol, 27
 GETGLOB 9
 GETGLOB 13
 SDEQ
 THROWIFNOT 101
-.loc ../contracts/UserData.sol, 56
+.loc ../contracts/UserData.sol, 63
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/UserData.sol, 58
+.loc ../contracts/UserData.sol, 65
 OVER
 CALLREF {
 	CALL $increaseAmount_internal_macro$
 }
-.loc ../contracts/UserData.sol, 59
+.loc ../contracts/UserData.sol, 66
 SWAP
 GETGLOB 9
 NEWC
@@ -267,19 +267,8 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/UserData.sol, 62
-OVER
-PUSHCONT {
-	LDU 128
-	LDREF
-	ENDS
-	CTOS
-}
-PUSHCONT {
-	LDU 128
-}
-IFELSE
-LDMSGADDR
+.loc ../contracts/UserData.sol, 69
+LDU 128
 ENDS
 .loc ../contracts/UserData.sol, 0
 CALLREF {
@@ -292,40 +281,63 @@ CALLREF {
 THROW 0
 
 .macro burn_internal_macro
-.loc ../contracts/UserData.sol, 63
+.loc ../contracts/UserData.sol, 31
+GETGLOB 10
+GTINT 0
+THROWIFNOT 102
+.loc ../contracts/UserData.sol, 27
 GETGLOB 9
 GETGLOB 13
 SDEQ
 THROWIFNOT 101
-.loc ../contracts/UserData.sol, 64
+.loc ../contracts/UserData.sol, 70
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/UserData.sol, 65
-OVER
+.loc ../contracts/UserData.sol, 71
+CALLREF {
+	CALL $getAmountToBurn_internal_macro$
+}
+.loc ../contracts/UserData.sol, 72
+DUP
 CALLREF {
 	CALL $decreaseAmount_internal_macro$
 }
-.loc ../contracts/UserData.sol, 66
+.loc ../contracts/UserData.sol, 73
+GETGLOB 11
 SWAP
-PUSHSLICE xc00000000000000000000000001b2b2066
+GETGLOB 13
 NEWC
+STSLICECONST x62_
 STSLICE
+PUSHINT 1
+STUR 111
+ROTREV
+NEWC
+STSLICECONST x0b2703d3
 STU 128
-ENDC
-PUSHINT 0
-SENDRAWMSG
-.loc ../contracts/UserData.sol, 67
-NEWC
-STSLICECONST x42_
 STSLICE
-PUSHINT 111
-STZEROES
+STBREFR
 ENDC
 PUSHPOW2 7
 SENDRAWMSG
+.loc ../contracts/UserData.sol, 0
+
+.globl	getAmountToBurn_internal
+.type	getAmountToBurn_internal, @function
+CALL $getAmountToBurn_internal_macro$
+
+.macro getAmountToBurn_internal_macro
+.loc ../contracts/UserData.sol, 77
+DUP
+GETGLOB 10
+LEQ
+IFRET
+.loc ../contracts/UserData.sol, 80
+DROP
+GETGLOB 10
 .loc ../contracts/UserData.sol, 0
 
 .macro processWithdraw
@@ -337,7 +349,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/UserData.sol, 71
+.loc ../contracts/UserData.sol, 84
 LDU 128
 LDU 64
 ENDS
@@ -352,23 +364,23 @@ CALLREF {
 THROW 0
 
 .macro processWithdraw_internal_macro
-.loc ../contracts/UserData.sol, 72
+.loc ../contracts/UserData.sol, 27
 GETGLOB 9
 GETGLOB 13
 SDEQ
 THROWIFNOT 101
-.loc ../contracts/UserData.sol, 73
+.loc ../contracts/UserData.sol, 85
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/UserData.sol, 75
+.loc ../contracts/UserData.sol, 87
 OVER
 CALLREF {
 	CALL $decreaseAmount_internal_macro$
 }
-.loc ../contracts/UserData.sol, 76
+.loc ../contracts/UserData.sol, 88
 SWAP
 GETGLOB 11
 GETGLOB 9
@@ -398,7 +410,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/UserData.sol, 79
+.loc ../contracts/UserData.sol, 91
 OVER
 PUSHCONT {
 	LDREF
@@ -424,13 +436,13 @@ CALLREF {
 THROW 0
 
 .macro sendToUser_internal_macro
-.loc ../contracts/UserData.sol, 80
+.loc ../contracts/UserData.sol, 92
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/UserData.sol, 81
+.loc ../contracts/UserData.sol, 93
 PUSH S2
 CALLREF {
 	CALL $_buildInitData_internal_macro$
@@ -441,12 +453,12 @@ STSLICECONST x801_
 STU 256
 ENDC
 CTOS
-.loc ../contracts/UserData.sol, 82
+.loc ../contracts/UserData.sol, 94
 PUSH S2
 CALLREF {
 	CALL $decreaseAmount_internal_macro$
 }
-.loc ../contracts/UserData.sol, 83
+.loc ../contracts/UserData.sol, 95
 PUSH S2
 ROLL 4
 PUSHSLICE xc00000000000000000000000002200c126
@@ -457,7 +469,7 @@ STU 128
 ENDC
 PUSHINT 0
 SENDRAWMSG
-.loc ../contracts/UserData.sol, 84
+.loc ../contracts/UserData.sol, 96
 XCHG S2
 GETGLOB 11
 ROLL 3
@@ -490,7 +502,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/UserData.sol, 87
+.loc ../contracts/UserData.sol, 99
 OVER
 PUSHCONT {
 	LDREF
@@ -516,7 +528,7 @@ CALLREF {
 THROW 0
 
 .macro receiveFromUser_internal_macro
-.loc ../contracts/UserData.sol, 88
+.loc ../contracts/UserData.sol, 100
 GETGLOB 9
 PUSH S3
 CALLREF {
@@ -530,18 +542,18 @@ ENDC
 CTOS
 SDEQ
 THROWIFNOT 102
-.loc ../contracts/UserData.sol, 89
+.loc ../contracts/UserData.sol, 101
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/UserData.sol, 90
+.loc ../contracts/UserData.sol, 102
 OVER
 CALLREF {
 	CALL $increaseAmount_internal_macro$
 }
-.loc ../contracts/UserData.sol, 91
+.loc ../contracts/UserData.sol, 103
 XCHG S2
 PUSHSLICE xc000000000000000000000000003ddf40b
 NEWC
@@ -551,12 +563,78 @@ STU 128
 ENDC
 PUSHINT 0
 SENDRAWMSG
-.loc ../contracts/UserData.sol, 92
+.loc ../contracts/UserData.sol, 104
 NEWC
 STSLICECONST x42_
 STSLICE
 PUSHINT 111
 STZEROES
+ENDC
+PUSHPOW2 7
+SENDRAWMSG
+.loc ../contracts/UserData.sol, 0
+
+.macro receiveFromBank
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/UserData.sol, 107
+LDU 128
+ENDS
+.loc ../contracts/UserData.sol, 0
+CALLREF {
+	CALL $receiveFromBank_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro receiveFromBank_internal_macro
+.loc ../contracts/UserData.sol, 27
+GETGLOB 9
+GETGLOB 13
+SDEQ
+THROWIFNOT 101
+.loc ../contracts/UserData.sol, 108
+CALLREF {
+	CALL $_reserve_internal_macro$
+}
+PUSHINT 0
+RAWRESERVE
+.loc ../contracts/UserData.sol, 109
+DUP
+CALLREF {
+	CALL $increaseAmount_internal_macro$
+}
+.loc ../contracts/UserData.sol, 110
+GETGLOB 13
+PUSHSLICE xc000000000000000000000000003ddf40b
+NEWC
+STSLICE
+STSLICE
+STU 128
+ENDC
+PUSHINT 0
+SENDRAWMSG
+.loc ../contracts/UserData.sol, 111
+GETGLOB 13
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHINT 1
+STUR 111
+GETGLOB 11
+NEWC
+STSLICECONST x0a11e0a5
+STSLICE
+STBREFR
 ENDC
 PUSHPOW2 7
 SENDRAWMSG
@@ -828,7 +906,7 @@ IFJMPREF {
 		CALL $amount$
 	}
 	DUP
-	PUSHINT 585664031
+	PUSHINT 417909029
 	EQUAL
 	IFJMPREF {
 		CALL $burn$
@@ -841,7 +919,7 @@ IFJMPREF {
 	}
 }
 DUP
-PUSHINT 1756716863
+PUSHINT 1737663397
 LEQ
 IFJMPREF {
 	DUP
@@ -849,6 +927,12 @@ IFJMPREF {
 	EQUAL
 	IFJMPREF {
 		CALL $sendToUser$
+	}
+	DUP
+	PUSHINT 1338334465
+	EQUAL
+	IFJMPREF {
+		CALL $receiveFromBank$
 	}
 	DUP
 	PUSHINT 1590080464
@@ -862,17 +946,22 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $userDataCode$
 	}
+}
+DUP
+PUSHINT 2126328548
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 1756716863
 	EQUAL
 	IFJMPREF {
 		CALL $constructor$
 	}
-}
-DUP
-PUSHINT 2126328548
-EQUAL
-IFJMPREF {
-	CALL $processWithdraw$
+	DUP
+	PUSHINT 2126328548
+	EQUAL
+	IFJMPREF {
+		CALL $processWithdraw$
+	}
 }
 

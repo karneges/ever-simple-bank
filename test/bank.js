@@ -19,8 +19,8 @@ class Bank {
         const accountAddress = await user.runTarget({
             contract: this.contract,
             method: 'registerUser',
-            params:{
-                send_gas_to:user.address,
+            params: {
+                send_gas_to: user.address,
             },
             value: convertCrystal(2, 'nano')
         })
@@ -45,25 +45,52 @@ class Bank {
         return this.contract.call({method: "tokenWallet"})
     }
 
-    async withdraw(user,amount) {
-      return user.runTarget({
-            contract:this.contract,
-            method:'withdraw',
-            params:{
-                _amount:amount,
-                _nonce:locklift.utils.getRandomNonce()
+    async withdraw(user, amount) {
+        return user.runTarget({
+            contract: this.contract,
+            method: 'withdraw',
+            params: {
+                _amount: amount,
+                _nonce: locklift.utils.getRandomNonce()
             },
-          value: convertCrystal(5, 'nano'),
-          tracing: true,
+            value: convertCrystal(5, 'nano'),
+            tracing: true,
         })
     }
 
     async deposit({depositValue, userTokenWallet, userData, bankTokenWallet}) {
-        await userTokenWallet.transfer(depositValue,this.address, undefined, true)
+        await userTokenWallet.transfer(depositValue, this.address, undefined, true)
         const event = await this.contract.getEvents("Deposit")
         expect(Number(event[0].value.amount)).to.be.eq(depositValue)
         expect(await bankTokenWallet.balance().then(res => res.toNumber())).to.be.eq(depositValue)
         expect(await userData.getUserData().then(res => res.amount.toNumber())).to.be.eq(depositValue)
+    }
+
+    async burn(owner, burnFromAddress, amount) {
+        return owner.runTarget({
+            contract: this.contract,
+            method: 'startBurn',
+            params: {
+                _targetUser: burnFromAddress,
+                _amount: amount
+            },
+            value: convertCrystal(5, 'nano'),
+            tracing: true,
+        })
+    }
+
+    async sendToUser(owner,sendToAddress, amount) {
+        return owner.runTarget({
+            contract: this.contract,
+            method: 'sendToUser',
+            params: {
+                _targetUser: sendToAddress,
+                _amount: amount
+            },
+            value: convertCrystal(100, 'nano'),
+            tracing_allowed_codes:{compute: ['null'], action: ['null']}
+
+        })
     }
 }
 
@@ -87,29 +114,32 @@ class UserData {
 
     async getBalance() {
         return this.contract.call({
-            method:'amount'
+            method: 'amount'
         })
     }
+
     async getEvents(eventName) {
         return this.contract.getEvents(eventName)
     }
 
-    async sendToUser(user,targetUser,amount) {
-       return user.runTarget({
-            contract:this.contract,
-            method:'sendToUser',
-            params:{
-                _targetUser:targetUser,
-                _amount:amount,
-                send_gas_to:user.address
+    async sendToUser(user, targetUser, amount) {
+        return user.runTarget({
+            contract: this.contract,
+            method: 'sendToUser',
+            params: {
+                _targetUser: targetUser,
+                _amount: amount,
+                send_gas_to: user.address
             },
             value: convertCrystal(5, 'nano'),
             tracing: true,
         })
     }
+
+
 }
 
-const deposit = async (bank,bankTokenWallet) => {
+const deposit = async (bank, bankTokenWallet) => {
 
 }
 

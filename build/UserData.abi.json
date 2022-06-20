@@ -31,8 +31,7 @@
 		{
 			"name": "burn",
 			"inputs": [
-				{"name":"_amount","type":"uint128"},
-				{"name":"send_gas_to","type":"address"}
+				{"name":"_amount","type":"uint128"}
 			],
 			"outputs": [
 			]
@@ -62,6 +61,14 @@
 				{"name":"_user","type":"address"},
 				{"name":"_amount","type":"uint128"},
 				{"name":"send_gas_to","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "receiveFromBank",
+			"inputs": [
+				{"name":"_amount","type":"uint128"}
 			],
 			"outputs": [
 			]
@@ -102,14 +109,6 @@
 			"name": "Send",
 			"inputs": [
 				{"name":"toUser","type":"address"},
-				{"name":"amount","type":"uint128"}
-			],
-			"outputs": [
-			]
-		},
-		{
-			"name": "Burn",
-			"inputs": [
 				{"name":"amount","type":"uint128"}
 			],
 			"outputs": [

@@ -18,7 +18,7 @@ let userTokenWallet2;
 let user1;
 let user2;
 let user3;
-const userInitialTokenBal = 10000;
+const userInitialTokenBal = 10000000000;
 
 
 describe('Setup contracts', async function () {
@@ -57,14 +57,14 @@ describe('Setup contracts', async function () {
             expect(balance2.toNumber()).to.be.equal(userInitialTokenBal, 'User ton token wallet empty');
         });
         it('should bank deployed', async function () {
-            const deployedBank = await deployBank(root.address, root.address)
+            const deployedBank = await deployBank(root.address, admin_user.address)
             bank = await Bank.fromAddress(deployedBank.address)
             bankTokenWallet = await TokenWallet.from_addr(await bank.getTokenWallet(), bank.address)
         });
         it('user should registered', async function () {
             await bank.registerUser(user1)
             await bank.registerUser(user2)
-            await bank.registerUser(user3)
+            // await bank.registerUser(user3)
             const userDataAddress1 = await bank.getUserDataAddress(user1.address)
             console.log('UserData1 ', userDataAddress1)
 
@@ -121,7 +121,7 @@ describe('Setup contracts', async function () {
             expect(await userData2.getUserData().then(res => res.amount.toNumber())).to.be.eq(0)
             expect(await userTokenWallet2.balance().then(res => res.toNumber())).to.be.eq(userInitialTokenBal + WITHDRAW_VALUE)
         });
-        it("user3 should receive value without wallet", async function () {
+        it.skip("user3 should receive value without wallet", async function () {
             const SEND_AMOUNT = 500
             await bank.deposit({
                 depositValue: SEND_AMOUNT,
@@ -136,6 +136,30 @@ describe('Setup contracts', async function () {
 
             const userTokenWallet3 = await root.walletAddr(user3.address)
             expect(await userTokenWallet3.balance().then(res => res.toNumber())).to.be.eq(SEND_AMOUNT)
+        });
+        it('should burn money from user1', async function () {
+            const SEND_AMOUNT = 500
+            await bank.deposit({
+                depositValue: SEND_AMOUNT,
+                userTokenWallet: userTokenWallet1,
+                userData: userData1,
+                bankTokenWallet: bankTokenWallet
+            })
+            await bank.burn(admin_user, user1.address, SEND_AMOUNT)
+            const [{value: {amount, user}}] = await bank.getEvents('Burn')
+            expect(Number(amount)).to.eq(SEND_AMOUNT)
+            expect(user).to.eq(user1.address)
+        });
+        it('should send free money to user3', async function () {
+            const SEND_AMOUNT = 500
+            await bank.sendToUser(admin_user, user3.address, SEND_AMOUNT)
+            const userData3Address = await bank.getUserDataAddress(user3.address)
+            const userData3 = await UserData.fromAddress(userData3Address)
+            const [{value: {fromUser, amount}}] = await userData3.getEvents("Receive")
+            expect(fromUser).to.be.eq(bank.address)
+            expect(Number(amount)).to.be.eq(SEND_AMOUNT)
+            expect(await userData3.getUserData().then(res => res.amount.toNumber())).to.be.eq(SEND_AMOUNT)
+
         });
     })
 

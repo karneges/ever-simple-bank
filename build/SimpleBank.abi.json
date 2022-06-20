@@ -8,7 +8,7 @@
 			"inputs": [
 				{"name":"_tokenRoot","type":"address"},
 				{"name":"_userDataCode","type":"cell"},
-				{"name":"_randomNonce","type":"uint64"}
+				{"name":"_owner","type":"address"}
 			],
 			"outputs": [
 			]
@@ -88,15 +88,25 @@
 		{
 			"name": "finishBurn",
 			"inputs": [
-				{"components":[{"name":"amount","type":"uint128"},{"name":"user","type":"address"}],"name":"userData","type":"tuple"}
+				{"name":"_burnedAmount","type":"uint128"},
+				{"name":"user","type":"address"}
 			],
 			"outputs": [
 			]
 		},
 		{
-			"name": "dummy",
+			"name": "sendToUser",
 			"inputs": [
-				{"name":"user_wallet","type":"address"}
+				{"name":"_targetUser","type":"address"},
+				{"name":"_amount","type":"uint128"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "finishSendToUser",
+			"inputs": [
+				{"name":"_user","type":"address"}
 			],
 			"outputs": [
 			]
@@ -160,6 +170,15 @@
 			],
 			"outputs": [
 			]
+		},
+		{
+			"name": "Burn",
+			"inputs": [
+				{"name":"user","type":"address"},
+				{"name":"amount","type":"uint128"}
+			],
+			"outputs": [
+			]
 		}
 	],
 	"fields": [
@@ -171,8 +190,8 @@
 		{"name":"tokenWallet","type":"address"},
 		{"name":"owner","type":"address"},
 		{"name":"tokenBalance","type":"uint128"},
+		{"name":"freeTokenBalance","type":"uint128"},
 		{"name":"userDataCode","type":"cell"},
-		{"name":"randomNonce","type":"uint64"},
-		{"components":[{"name":"value","type":"uint128"},{"name":"user","type":"address"}],"name":"pendingBurn","type":"map(address,tuple)"}
+		{"components":[{"name":"value","type":"uint128"},{"name":"user","type":"address"}],"name":"pendingDeposit","type":"map(address,tuple)"}
 	]
 }

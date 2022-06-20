@@ -688,7 +688,7 @@ const deployUser = async function() {
             _randomNonce: locklift.utils.getRandomNonce()
         },
         keyPair,
-    }, convertCrystal(50, 'nano'));
+    }, convertCrystal(10000, 'nano'));
 
     _user.afterRun = afterRun;
 
@@ -708,7 +708,7 @@ const deployUser = async function() {
     return _user;
 }
 
-const deployBank = async function(rootAddress,tokenWallet) {
+const deployBank = async function(rootAddress,ownerAccount) {
     const [keyPair] = await locklift.keys.getKeyPairs();
     const SimpleBank = await locklift.factory.getContract('SimpleBank');
     const UserData = await locklift.factory.getAccount('UserData');
@@ -719,9 +719,8 @@ const deployBank = async function(rootAddress,tokenWallet) {
         },
         constructorParams: {
             _tokenRoot:rootAddress,
-            _tokenWallet:tokenWallet,
             _userDataCode:UserData.code,
-            _randomNonce: locklift.utils.getRandomNonce()
+            _owner:ownerAccount
         },
         keyPair,
     }, convertCrystal(50, 'nano'))

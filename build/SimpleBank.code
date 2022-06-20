@@ -18,22 +18,22 @@ PUSHCONT {
 IF
 LDMSGADDR
 LDREF
-LDU 64
+LDREF
 ENDS
-.loc ../contracts/SimpleBank.sol, 42
+CTOS
+LDMSGADDR
+ENDS
+.loc ../contracts/SimpleBank.sol, 45
 ACCEPT
-.loc ../contracts/SimpleBank.sol, 43
+.loc ../contracts/SimpleBank.sol, 46
 ROT
 SETGLOB 11
-.loc ../contracts/SimpleBank.sol, 44
-SWAP
-SETGLOB 15
-.loc ../contracts/SimpleBank.sol, 45
-SETGLOB 16
-.loc ../contracts/SimpleBank.sol, 46
-GETGLOB 9
-SETGLOB 13
 .loc ../contracts/SimpleBank.sol, 47
+SWAP
+SETGLOB 16
+.loc ../contracts/SimpleBank.sol, 48
+SETGLOB 13
+.loc ../contracts/SimpleBank.sol, 49
 PUSHINT 100000000
 MYADDR
 GETGLOB 11
@@ -67,7 +67,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 53
+.loc ../contracts/SimpleBank.sol, 64
 OVER
 PUSHCONT {
 	LDREF
@@ -88,13 +88,13 @@ CALLREF {
 THROW 0
 
 .macro receiveTokenWalletAddress_internal_macro
-.loc ../contracts/SimpleBank.sol, 56
+.loc ../contracts/SimpleBank.sol, 65
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 57
+.loc ../contracts/SimpleBank.sol, 66
 SETGLOB 12
 .loc ../contracts/SimpleBank.sol, 0
 
@@ -103,7 +103,7 @@ SETGLOB 12
 CALL $_reserve_internal_macro$
 
 .macro _reserve_internal_macro
-.loc ../contracts/SimpleBank.sol, 61
+.loc ../contracts/SimpleBank.sol, 71
 GETPARAM 7
 FIRST
 DEPTH
@@ -124,7 +124,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 64
+.loc ../contracts/SimpleBank.sol, 74
 LDU 32
 GETGLOB 4
 ROT
@@ -218,7 +218,7 @@ IFREF {
 THROW 0
 
 .macro getDetails_internal_macro
-.loc ../contracts/SimpleBank.sol, 65
+.loc ../contracts/SimpleBank.sol, 76
 GETGLOB 4
 PUSHINT 0
 SETINDEXQ 2
@@ -239,7 +239,7 @@ TUPLE 4
 CALL $_buildInitData_internal_macro$
 
 .macro _buildInitData_internal_macro
-.loc ../contracts/SimpleBank.sol, 71
+.loc ../contracts/SimpleBank.sol, 91
 PUSHINT 0
 NEWC
 STU 256
@@ -257,7 +257,7 @@ PUSHINT 1
 ROT
 PUSHINT 64
 DICTUSET
-GETGLOB 15
+GETGLOB 16
 PUSHINT 2
 ROT
 PUSHINT 64
@@ -265,7 +265,7 @@ DICTUSETREF
 NEWC
 STDICT
 ENDC
-GETGLOB 15
+GETGLOB 16
 NEWC
 STSLICECONST x2_
 STOPTREF
@@ -283,7 +283,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 83
+.loc ../contracts/SimpleBank.sol, 103
 OVER
 PUSHCONT {
 	LDREF
@@ -304,19 +304,19 @@ CALLREF {
 THROW 0
 
 .macro registerUser_internal_macro
-.loc ../contracts/SimpleBank.sol, 84
+.loc ../contracts/SimpleBank.sol, 104
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 85
+.loc ../contracts/SimpleBank.sol, 105
 GETGLOB 9
 CALLREF {
 	CALL $deployUserData_internal_macro$
 }
 DROP
-.loc ../contracts/SimpleBank.sol, 86
+.loc ../contracts/SimpleBank.sol, 106
 NEWC
 STSLICECONST x42_
 STSLICE
@@ -332,7 +332,7 @@ SENDRAWMSG
 CALL $deployUserData_internal_macro$
 
 .macro deployUserData_internal_macro
-.loc ../contracts/SimpleBank.sol, 90
+.loc ../contracts/SimpleBank.sol, 119
 CALLREF {
 	CALL $_buildInitData_internal_macro$
 }
@@ -388,7 +388,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 96
+.loc ../contracts/SimpleBank.sol, 125
 LDU 32
 GETGLOB 4
 ROT
@@ -470,7 +470,7 @@ THROW 0
 CALL $getUserDataAddress_internal_macro$
 
 .macro getUserDataAddress_internal_macro
-.loc ../contracts/SimpleBank.sol, 97
+.loc ../contracts/SimpleBank.sol, 133
 GETGLOB 4
 PUSHINT 0
 SETINDEXQ 2
@@ -499,7 +499,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 100
+.loc ../contracts/SimpleBank.sol, 138
 LDU 128
 LDU 64
 ENDS
@@ -514,10 +514,10 @@ CALLREF {
 THROW 0
 
 .macro finishDeposit_internal_macro
-.loc ../contracts/SimpleBank.sol, 104
+.loc ../contracts/SimpleBank.sol, 139
 DROP
 ACCEPT
-.loc ../contracts/SimpleBank.sol, 106
+.loc ../contracts/SimpleBank.sol, 141
 GETGLOB 9
 PUSHSLICE xc000000000000000000000000057f202d9
 NEWC
@@ -538,7 +538,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 109
+.loc ../contracts/SimpleBank.sol, 144
 LDU 128
 LDU 64
 ENDS
@@ -553,22 +553,22 @@ CALLREF {
 THROW 0
 
 .macro withdraw_internal_macro
-.loc ../contracts/SimpleBank.sol, 110
+.loc ../contracts/SimpleBank.sol, 145
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 111
+.loc ../contracts/SimpleBank.sol, 146
 OVER
 GTINT 0
 THROWIFNOT 107
-.loc ../contracts/SimpleBank.sol, 112
+.loc ../contracts/SimpleBank.sol, 147
 GETGLOB 9
 CALLREF {
 	CALL $getUserDataAddress_internal_macro$
 }
-.loc ../contracts/SimpleBank.sol, 113
+.loc ../contracts/SimpleBank.sol, 148
 XCHG S1, S2
 NEWC
 STSLICECONST x62_
@@ -591,7 +591,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 116
+.loc ../contracts/SimpleBank.sol, 154
 OVER
 PUSHCONT {
 	LDREF
@@ -614,13 +614,21 @@ CALLREF {
 THROW 0
 
 .macro finishWithdraw_internal_macro
-.loc ../contracts/SimpleBank.sol, 117
+.loc ../contracts/SimpleBank.sol, 154
 DROP
-.loc ../contracts/SimpleBank.sol, 118
+OVER
+.loc ../contracts/SimpleBank.sol, 60
+CALLREF {
+	CALL $getUserDataAddress_internal_macro$
+}
+GETGLOB 9
+SDEQ
+THROWIFNOT 103
+.loc ../contracts/SimpleBank.sol, 160
 GETGLOB 10
 NEWC
 STU 128
-.loc ../contracts/SimpleBank.sol, 119
+.loc ../contracts/SimpleBank.sol, 161
 PUSH2 S1, S2
 PUSHSLICE xc000000000000000000000000072da1156
 NEWC
@@ -630,11 +638,11 @@ STU 128
 ENDC
 PUSHINT 0
 SENDRAWMSG
-.loc ../contracts/SimpleBank.sol, 120
+.loc ../contracts/SimpleBank.sol, 162
 ENDC
 FALSE
 PUSH S3
-PUSHINT 500000000
+PUSHINT 0
 BLKSWAP 2, 4
 GETGLOB 12
 TRUE
@@ -643,8 +651,8 @@ STSLICECONST x6_
 STI 1
 STSLICECONST x1_
 STSLICE
-PUSHINT 2803819077499249229031122585109857988247553
-STUR 143
+PUSHINT 1
+STUR 111
 ROLLREV 6
 NEWC
 STSLICECONST x73e22143
@@ -672,7 +680,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 130
+.loc ../contracts/SimpleBank.sol, 169
 OVER
 PUSHCONT {
 	LDREF
@@ -694,24 +702,165 @@ CALLREF {
 THROW 0
 
 .macro startBurn_internal_macro
-.loc ../contracts/SimpleBank.sol, 131
+.loc ../contracts/SimpleBank.sol, 56
 GETGLOB 9
 GETGLOB 13
 SDEQ
 THROWIFNOT 102
-.loc ../contracts/SimpleBank.sol, 132
+.loc ../contracts/SimpleBank.sol, 174
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 133
+.loc ../contracts/SimpleBank.sol, 175
+SWAP
+CALLREF {
+	CALL $getUserDataAddress_internal_macro$
+}
+.loc ../contracts/SimpleBank.sol, 176
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHINT 417909029
+STUR 143
+STU 128
+ENDC
+PUSHPOW2 7
+SENDRAWMSG
+.loc ../contracts/SimpleBank.sol, 0
+
+.macro finishBurn
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/SimpleBank.sol, 182
+OVER
+PUSHCONT {
+	LDU 128
+	LDREF
+	ENDS
+	CTOS
+}
+PUSHCONT {
+	LDU 128
+}
+IFELSE
+LDMSGADDR
+ENDS
+.loc ../contracts/SimpleBank.sol, 0
+CALLREF {
+	CALL $finishBurn_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro finishBurn_internal_macro
+.loc ../contracts/SimpleBank.sol, 182
+DUP
+.loc ../contracts/SimpleBank.sol, 60
+CALLREF {
+	CALL $getUserDataAddress_internal_macro$
+}
+GETGLOB 9
+SDEQ
+THROWIFNOT 103
+.loc ../contracts/SimpleBank.sol, 187
+CALLREF {
+	CALL $_reserve_internal_macro$
+}
+PUSHINT 0
+RAWRESERVE
+.loc ../contracts/SimpleBank.sol, 188
+GETGLOB 15
+PUSH S2
+ADD
+UFITS 128
+SETGLOB 15
+.loc ../contracts/SimpleBank.sol, 189
+PUSHSLICE xc000000000000000000000000065ab749c
+NEWC
+STSLICE
+STSLICE
+STU 128
+ENDC
+PUSHINT 0
+SENDRAWMSG
+.loc ../contracts/SimpleBank.sol, 190
+GETGLOB 13
+NEWC
+STSLICECONST x42_
+STSLICE
+PUSHINT 111
+STZEROES
+ENDC
+PUSHPOW2 7
+SENDRAWMSG
+.loc ../contracts/SimpleBank.sol, 0
+
+.macro sendToUser
+DROP
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/SimpleBank.sol, 197
+OVER
+PUSHCONT {
+	LDREF
+	ENDS
+	CTOS
+}
+IF
+LDMSGADDR
+LDU 128
+ENDS
+.loc ../contracts/SimpleBank.sol, 0
+CALLREF {
+	CALL $sendToUser_internal_macro$
+}
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
+THROW 0
+
+.macro sendToUser_internal_macro
+.loc ../contracts/SimpleBank.sol, 56
+GETGLOB 9
+GETGLOB 13
+SDEQ
+THROWIFNOT 102
+.loc ../contracts/SimpleBank.sol, 202
+DUP
+GETGLOB 15
+LEQ
+THROWIFNOT 105
+.loc ../contracts/SimpleBank.sol, 203
+CALLREF {
+	CALL $_reserve_internal_macro$
+}
+PUSHINT 0
+RAWRESERVE
+.loc ../contracts/SimpleBank.sol, 204
 OVER
 CALLREF {
 	CALL $getUserDataAddress_internal_macro$
 }
-.loc ../contracts/SimpleBank.sol, 134
-XCHG S2
+.loc ../contracts/SimpleBank.sol, 205
+OVER
+ROLL 3
 PAIR
 OVER
 GETGLOB 17
@@ -727,18 +876,19 @@ ROTREV
 PUSHINT 267
 DICTSETB
 SETGLOB 17
-.loc ../contracts/SimpleBank.sol, 138
+.loc ../contracts/SimpleBank.sol, 209
 NEWC
 STSLICECONST x62_
 STSLICE
-PUSHINT 6829343592580407246
-STUR 175
+PUSHINT 1338334465
+STUR 143
+STU 128
 ENDC
 PUSHPOW2 7
 SENDRAWMSG
 .loc ../contracts/SimpleBank.sol, 0
 
-.macro finishBurn
+.macro finishSendToUser
 DROP
 GETGLOB 6
 THROWIFNOT 76
@@ -747,26 +897,19 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 145
+.loc ../contracts/SimpleBank.sol, 215
 OVER
 PUSHCONT {
-	LDU 128
 	LDREF
 	ENDS
 	CTOS
 }
-PUSHCONT {
-	LDU 128
-}
-IFELSE
+IF
 LDMSGADDR
-ROTREV
-PAIR
-SWAP
 ENDS
 .loc ../contracts/SimpleBank.sol, 0
 CALLREF {
-	CALL $finishBurn_internal_macro$
+	CALL $finishSendToUser_internal_macro$
 }
 DROP
 CALLREF {
@@ -774,8 +917,21 @@ CALLREF {
 }
 THROW 0
 
-.macro finishBurn_internal_macro
-.loc ../contracts/SimpleBank.sol, 146
+.macro finishSendToUser_internal_macro
+.loc ../contracts/SimpleBank.sol, 60
+CALLREF {
+	CALL $getUserDataAddress_internal_macro$
+}
+GETGLOB 9
+SDEQ
+THROWIFNOT 103
+.loc ../contracts/SimpleBank.sol, 216
+CALLREF {
+	CALL $_reserve_internal_macro$
+}
+PUSHINT 0
+RAWRESERVE
+.loc ../contracts/SimpleBank.sol, 217
 GETGLOB 9
 GETGLOB 17
 PUSHINT 267
@@ -794,108 +950,73 @@ IFREFELSEREF
 	}
 	PAIR
 }
-.loc ../contracts/SimpleBank.sol, 147
+.loc ../contracts/SimpleBank.sol, 218
 DUP
+FIRST
+SWAP
 SECOND
-PUSH S2
-SECOND
-SDEQ
-THROWIFNOT 103
-.loc ../contracts/SimpleBank.sol, 148
-CALLREF {
-	CALL $_reserve_internal_macro$
-}
+PUSHSLICE xc000000000000000000000000057f202d9
+NEWC
+STSLICE
+STSLICE
+STU 128
+ENDC
 PUSHINT 0
-RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 149
+SENDRAWMSG
+.loc ../contracts/SimpleBank.sol, 219
 GETGLOB 9
 GETGLOB 17
 PUSHINT 267
 DICTDEL
 DROP
 SETGLOB 17
-.loc ../contracts/SimpleBank.sol, 150
-DUP
-FIRST
-ROT
-FIRST
-LEQ
-THROWIFNOT 103
-.loc ../contracts/SimpleBank.sol, 151
-DUP
-SECOND
-SWAP
-FIRST
-GETGLOB 9
+.loc ../contracts/SimpleBank.sol, 220
+GETGLOB 13
 NEWC
-STSLICECONST x62_
+STSLICECONST x42_
 STSLICE
-PUSHINT 1
-STUR 111
-ROTREV
-NEWC
-STSLICECONST x22e8861f
-STU 128
-STSLICE
-STBREFR
+PUSHINT 111
+STZEROES
 ENDC
 PUSHPOW2 7
 SENDRAWMSG
 .loc ../contracts/SimpleBank.sol, 0
 
-.macro dummy
-DROP
-GETGLOB 6
-THROWIFNOT 76
-GETGLOB 2
-ISNULL
-IFREF {
-	CALL $c4_to_c7$
-}
-.loc ../contracts/SimpleBank.sol, 153
-OVER
-PUSHCONT {
-	LDREF
-	ENDS
-	CTOS
-}
-IF
-LDMSGADDR
-ENDS
-.loc ../contracts/SimpleBank.sol, 0
-CALLREF {
-	CALL $dummy_internal_macro$
-}
-DROP
-CALLREF {
-	CALL $c7_to_c4$
-}
-THROW 0
+.globl	handleSendToUserError_internal
+.type	handleSendToUserError_internal, @function
+CALL $handleSendToUserError_internal_macro$
 
-.macro dummy_internal_macro
-.loc ../contracts/SimpleBank.sol, 153
+.macro handleSendToUserError_internal_macro
+.loc ../contracts/SimpleBank.sol, 224
 DROP
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 0
-
-.macro on_bounce_macro
-GETGLOB 6
-THROWIFNOT 76
-GETGLOB 2
-ISNULL
-IFREF {
-	CALL $c4_to_c7$
+.loc ../contracts/SimpleBank.sol, 226
+GETGLOB 9
+GETGLOB 17
+PUSHINT 267
+DICTGET
+IFREFELSEREF
+{
+	LDU 128
+	LDMSGADDR
+	ENDS
+	PAIR
 }
-.loc ../contracts/SimpleBank.sol, 156
-ACCEPT
-.loc ../contracts/SimpleBank.sol, 157
+{
+	PUSHINT 0
+	PUSHREFSLICE {
+		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
+	}
+	PAIR
+}
+.loc ../contracts/SimpleBank.sol, 227
 TUPLE 0
 NEWC
-PUSHSLICE x426f756e63652120736c696365203d20
+PUSHSLICE x68616e646c6553656e64546f557365722c206d73672e73656e646572203d20
 CALLREF {
 	CALL $storeStringInBuilders_macro$
 }
@@ -909,141 +1030,51 @@ CALLREF {
 CALLREF {
 	CALL $console_no_obj_log_macro$
 }
-.loc ../contracts/SimpleBank.sol, 158
-DUP
-LDU 32
-POP S2
-.loc ../contracts/SimpleBank.sol, 160
-PUSHINT 1944199491
-EQUAL
-PUSHCONT {
-	.loc ../contracts/SimpleBank.sol, 162
-	CALLREF {
-		CALL $_reserve_internal_macro$
-	}
-	PUSHINT 0
-	RAWRESERVE
-	.loc ../contracts/SimpleBank.sol, 163
-	DUP
-	LDU 128
-	LDMSGADDR
-	LDU 128
-	LDREF
-	ENDS
-	CTOS
-	LDMSGADDR
-	LDI 1
-	LDREF
-	ENDS
-	PUSHSLICE x8_
-	POP S7
-	.loc ../contracts/SimpleBank.sol, 169
-	TUPLE 0
-	NEWC
-	PUSHSLICE x426f756e63652120616d6f756e74203d20
-	CALLREF {
-		CALL $storeStringInBuilders_macro$
-	}
-	PUSH S7
-	PUSHINT 0
-	BLKPUSH 2, 0
-	CALLREF {
-		CALL $convertIntToDecStr_macro$
-	}
-	CALLREF {
-		CALL $assembleList_macro$
-	}
-	CALLREF {
-		CALL $console_no_obj_log_macro$
-	}
-	.loc ../contracts/SimpleBank.sol, 170
-	TUPLE 0
-	NEWC
-	PUSHSLICE x426f756e63652120726563697069656e74203d20
-	CALLREF {
-		CALL $storeStringInBuilders_macro$
-	}
-	PUSH S6
-	CALLREF {
-		CALL $convertAddressToHexString_macro$
-	}
-	CALLREF {
-		CALL $assembleList_macro$
-	}
-	CALLREF {
-		CALL $console_no_obj_log_macro$
-	}
-	.loc ../contracts/SimpleBank.sol, 171
-	TUPLE 0
-	NEWC
-	PUSHSLICE x426f756e636521206465706c6f7957616c6c657456616c7565203d20
-	CALLREF {
-		CALL $storeStringInBuilders_macro$
-	}
-	ROLL 5
-	PUSHINT 0
-	BLKPUSH 2, 0
-	CALLREF {
-		CALL $convertIntToDecStr_macro$
-	}
-	CALLREF {
-		CALL $assembleList_macro$
-	}
-	CALLREF {
-		CALL $console_no_obj_log_macro$
-	}
-	.loc ../contracts/SimpleBank.sol, 172
-	TUPLE 0
-	NEWC
-	PUSHSLICE x426f756e6365212072656d61696e696e67476173546f203d20
-	CALLREF {
-		CALL $storeStringInBuilders_macro$
-	}
-	PUSH S4
-	CALLREF {
-		CALL $convertAddressToHexString_macro$
-	}
-	CALLREF {
-		CALL $assembleList_macro$
-	}
-	CALLREF {
-		CALL $console_no_obj_log_macro$
-	}
-	.loc ../contracts/SimpleBank.sol, 173
-	XCHG S2
-	PUSHINT 100000000
-	BLKSWAP 2, 4
-	SWAP
-	GETGLOB 11
-	NEWC
-	STSLICECONST x62_
-	STSLICE
-	PUSHINT 2868722788230934574387753789225109188247553
-	STUR 143
-	ROLLREV 6
-	NEWC
-	STSLICECONST x73e22143
-	STU 128
-	STSLICE
-	STU 128
-	ROLLREV 3
-	NEWC
-	STSLICE
-	STI 1
-	STREF
-	STBREFR
-	STBREFR
-	ENDC
-	PUSHINT 0
-	SENDRAWMSG
-	.loc ../contracts/SimpleBank.sol, 0
-}
-IF
-.loc ../contracts/SimpleBank.sol, 0
-DROP
+.loc ../contracts/SimpleBank.sol, 228
+TUPLE 0
+NEWC
+PUSHSLICE x68616e646c6553656e64546f557365722c75736572203d20
 CALLREF {
-	CALL $c7_to_c4$
+	CALL $storeStringInBuilders_macro$
 }
+PUSH S2
+SECOND
+CALLREF {
+	CALL $convertAddressToHexString_macro$
+}
+CALLREF {
+	CALL $assembleList_macro$
+}
+CALLREF {
+	CALL $console_no_obj_log_macro$
+}
+.loc ../contracts/SimpleBank.sol, 229
+DUP
+SECOND
+CALLREF {
+	CALL $deployUserData_internal_macro$
+}
+DROP
+.loc ../contracts/SimpleBank.sol, 230
+DUP
+SECOND
+CALLREF {
+	CALL $getUserDataAddress_internal_macro$
+}
+.loc ../contracts/SimpleBank.sol, 231
+SWAP
+FIRST
+SWAP
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHINT 1338334465
+STUR 143
+STU 128
+ENDC
+PUSHPOW2 7
+SENDRAWMSG
+.loc ../contracts/SimpleBank.sol, 0
 
 .macro onAcceptTokensTransfer
 DROP
@@ -1054,7 +1085,7 @@ ISNULL
 IFREF {
 	CALL $c4_to_c7$
 }
-.loc ../contracts/SimpleBank.sol, 185
+.loc ../contracts/SimpleBank.sol, 237
 OVER
 PUSHCONT {
 	LDREF
@@ -1089,23 +1120,23 @@ CALLREF {
 THROW 0
 
 .macro onAcceptTokensTransfer_internal_macro
-.loc ../contracts/SimpleBank.sol, 193
+.loc ../contracts/SimpleBank.sol, 245
 BLKDROP 3
 CALLREF {
 	CALL $_reserve_internal_macro$
 }
 PUSHINT 0
 RAWRESERVE
-.loc ../contracts/SimpleBank.sol, 194
+.loc ../contracts/SimpleBank.sol, 246
 GETGLOB 9
 GETGLOB 12
 SDEQ
 THROWIFNOT 101
-.loc ../contracts/SimpleBank.sol, 195
+.loc ../contracts/SimpleBank.sol, 247
 CALLREF {
 	CALL $getUserDataAddress_internal_macro$
 }
-.loc ../contracts/SimpleBank.sol, 196
+.loc ../contracts/SimpleBank.sol, 248
 OVER
 UFITS 64
 ROTREV
@@ -1121,6 +1152,38 @@ PUSHPOW2 7
 SENDRAWMSG
 .loc ../contracts/SimpleBank.sol, 0
 DROP
+
+.macro on_bounce_macro
+GETGLOB 6
+THROWIFNOT 76
+GETGLOB 2
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+.loc ../contracts/SimpleBank.sol, 255
+ACCEPT
+.loc ../contracts/SimpleBank.sol, 256
+DUP
+LDU 32
+POP S2
+.loc ../contracts/SimpleBank.sol, 257
+PUSHINT 1338334465
+EQUAL
+PUSHCONT {
+	.loc ../contracts/SimpleBank.sol, 258
+	DUP
+	CALLREF {
+		CALL $handleSendToUserError_internal_macro$
+	}
+	.loc ../contracts/SimpleBank.sol, 0
+}
+IF
+.loc ../contracts/SimpleBank.sol, 0
+DROP
+CALLREF {
+	CALL $c7_to_c4$
+}
 
 .macro c4_to_c7
 PUSHROOT
@@ -1143,8 +1206,8 @@ ENDS
 CTOS
 LDMSGADDR
 LDU 128
+LDU 128
 LDREF
-LDU 64
 LDDICT
 ENDS
 SETGLOB 17
@@ -1182,9 +1245,9 @@ PUSHCONT {
 	}
 	BLKPUSH 2, 0
 	PUSHINT 0
+	DUP
 	PUSHREF {
 	}
-	PUSHINT 0
 	NEWDICT
 	SETGLOB 17
 	SETGLOB 16
@@ -1232,8 +1295,8 @@ ROLLREV 5
 NEWC
 STSLICE
 STU 128
+STU 128
 STREF
-STU 64
 STDICT
 STBREFR
 STBREFR
@@ -1395,7 +1458,7 @@ ENDS
 CALLREF {
 	CALL $c4_to_c7$
 }
-GETGLOB 15
+GETGLOB 16
 OVER
 PUSHCONT {
 	PUSHSLICE xc0000000000000000000000000e792a3a5
@@ -1458,7 +1521,7 @@ SENDRAWMSG
 
 .macro public_function_selector
 DUP
-PUSHINT 475424740
+PUSHINT 262613689
 LEQ
 IFJMPREF {
 	DUP
@@ -1468,11 +1531,28 @@ IFJMPREF {
 		CALL $getUserDataAddress$
 	}
 	DUP
+	PUSHINT 168943781
+	EQUAL
+	IFJMPREF {
+		CALL $finishSendToUser$
+	}
+	DUP
+	PUSHINT 187106259
+	EQUAL
+	IFJMPREF {
+		CALL $finishBurn$
+	}
+	DUP
 	PUSHINT 262613689
 	EQUAL
 	IFJMPREF {
 		CALL $getDetails$
 	}
+}
+DUP
+PUSHINT 878400710
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 360607305
 	EQUAL
@@ -1485,11 +1565,6 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $startBurn$
 	}
-}
-DUP
-PUSHINT 1081411783
-LEQ
-IFJMPREF {
 	DUP
 	PUSHINT 507471650
 	EQUAL
@@ -1502,28 +1577,16 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $withdraw$
 	}
+}
+DUP
+PUSHINT 1532290967
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 932454767
 	EQUAL
 	IFJMPREF {
 		CALL $finishDeposit$
-	}
-	DUP
-	PUSHINT 1081411783
-	EQUAL
-	IFJMPREF {
-		CALL $dummy$
-	}
-}
-DUP
-PUSHINT 1691901902
-LEQ
-IFJMPREF {
-	DUP
-	PUSHINT 1181900103
-	EQUAL
-	IFJMPREF {
-		CALL $constructor$
 	}
 	DUP
 	PUSHINT 1187817425
@@ -1538,16 +1601,22 @@ IFJMPREF {
 		CALL $receiveTokenWalletAddress$
 	}
 	DUP
-	PUSHINT 1691901902
+	PUSHINT 1532290967
 	EQUAL
 	IFJMPREF {
-		CALL $finishBurn$
+		CALL $constructor$
 	}
 }
 DUP
 PUSHINT 1896024939
 LEQ
 IFJMPREF {
+	DUP
+	PUSHINT 1659773742
+	EQUAL
+	IFJMPREF {
+		CALL $sendToUser$
+	}
 	DUP
 	PUSHINT 1737663397
 	EQUAL

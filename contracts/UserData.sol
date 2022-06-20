@@ -17,12 +17,20 @@ contract UserData is IUserData {
     address static simpleBank;
     uint8 constant NOT_SIMPLE_BANK = 101;
     uint8 constant NOT_USER_DATA = 102;
+    uint8 constant ZERO_BALANCE = 102;
     uint128 constant CONTRACT_MIN_BALANCE = 0.1 ton;
 
     constructor() public {
         require(msg.sender == simpleBank, NOT_SIMPLE_BANK);
      }
-
+    modifier onlyRoot() {
+        require(msg.sender == simpleBank, NOT_SIMPLE_BANK);
+        _;
+    }
+    modifier hasBalance() {
+        require(amount > 0, ZERO_BALANCE);
+        _;
+    }
     function _buildInitData(address _user) internal view returns (TvmCell) {
         return tvm.buildStateInit({
             contr: UserData,
@@ -51,25 +59,28 @@ contract UserData is IUserData {
          amount -= _amount;
     }
 
-    function processDeposit(uint128 _amount,uint64 _nonce) external override {
-        require(msg.sender == simpleBank, NOT_SIMPLE_BANK);
+    function processDeposit(uint128 _amount,uint64 _nonce) external override onlyRoot {
         tvm.rawReserve(_reserve(), 0);
 
         increaseAmount(_amount);
         ISimpleBank(msg.sender).finishDeposit{value: 0, flag: MsgFlag.ALL_NOT_RESERVED}(_amount,_nonce);
     }
 
-    function burn(uint128 _amount,address send_gas_to) external override {
-        require(msg.sender == simpleBank, NOT_SIMPLE_BANK);
+    function burn(uint128 _amount) external override hasBalance onlyRoot {
         tvm.rawReserve(_reserve(), 0);
-        decreaseAmount(_amount);
-        emit Burn(_amount);
-        send_gas_to.transfer({ value: 0, bounce: false, flag: MsgFlag.ALL_NOT_RESERVED });
+        uint128 amountToBurn = getAmountToBurn(_amount);
+        decreaseAmount(amountToBurn);
+        ISimpleBank(simpleBank).finishBurn{value:0,flag:MsgFlag.ALL_NOT_RESERVED}(amountToBurn,user);
+    }
+
+    function getAmountToBurn(uint128 _amount) internal returns (uint128) {
+        if (_amount <= amount) {
+            return _amount;
+        } 
+        return  amount;
     }
     
-
-    function processWithdraw(uint128 _amount,uint64 _nonce) external override {
-        require(msg.sender == simpleBank, NOT_SIMPLE_BANK);
+    function processWithdraw(uint128 _amount,uint64 _nonce) external override onlyRoot {
         tvm.rawReserve(_reserve(), 0);
 
         decreaseAmount(_amount);
@@ -90,5 +101,12 @@ contract UserData is IUserData {
         increaseAmount(_amount);
         emit Receive(_user,_amount);
         send_gas_to.transfer({ value: 0, bounce: false, flag: MsgFlag.ALL_NOT_RESERVED });
+    }
+
+    function receiveFromBank(uint128 _amount) external override onlyRoot {
+        tvm.rawReserve(_reserve(), 0);
+        increaseAmount(_amount);
+        emit Receive(simpleBank,_amount);
+        ISimpleBank(simpleBank).finishSendToUser{value: 0, flag: MsgFlag.ALL_NOT_RESERVED}(user);
     }
 }

@@ -43,7 +43,7 @@ module.exports = {
       // !!! Never commit it in your repos !!!
       keys: {
         phrase:
-          "room steel rival siren ocean pen choose pause balance electric vacant enroll",
+          "",
         amount: 20,
       },
     },

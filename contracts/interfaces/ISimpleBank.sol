@@ -7,6 +7,7 @@ import "./IUserData.sol";
 interface ISimpleBank {
     event Deposit(address user, uint128 amount);
     event Withdraw(address user, uint128 amount);
+    event Burn(address user,uint128 amount);
 
     struct Details {
         address tokenRoot;
@@ -26,5 +27,7 @@ interface ISimpleBank {
         address user, uint128 _amount, uint64 _nonce
     ) external;
     function startBurn(address _targetUser,uint128 _amount) external;
-    function finishBurn(IUserData.UserDataDetails userData) external;
+    function finishBurn(uint128 _burnedAmount, address user) external;
+    function sendToUser(address _targetuser,uint128 _amount) external;
+    function finishSendToUser(address _user) external;
 }
